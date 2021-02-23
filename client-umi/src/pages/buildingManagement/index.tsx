@@ -10,19 +10,16 @@ import {
   NavBar,
   Icon,
 } from 'antd-mobile';
-import { IUser } from '@/type';
+import { IRegion } from '@/type';
 
-interface IUserManagementProps {}
+interface IBuildingManagementProps {}
 
-const UserManagement: React.FC<IUserManagementProps> = (props) => {
-  const [data, setData] = React.useState<IUser[]>([
-    { id: '1', name: 'Shevchenko' },
-    { id: '2', name: 'Seedorf' },
-    { id: '3', name: 'Kaka' },
-    { id: '4', name: 'Inzaghi' },
-    { id: '5', name: 'Pirlo' },
-    { id: '6', name: 'Gattuso' },
-    { id: '7', name: 'Nesta' },
+const BuildingManagement: React.FC<IBuildingManagementProps> = (props) => {
+  const [data, setData] = React.useState<IRegion[]>([
+    { id: '1', name: '食堂' },
+    { id: '2', name: '收费大厅' },
+    { id: '3', name: '办公楼' },
+    { id: '4', name: '配电室' },
   ]);
   return (
     <Box>
@@ -31,7 +28,7 @@ const UserManagement: React.FC<IUserManagementProps> = (props) => {
         icon={<Icon type="left" />}
         onLeftClick={() => console.log('onLeftClick')}
       >
-        用户管理
+        建筑
       </NavBar>
       <SearchBar placeholder="Search" maxLength={8} />
       <WhiteSpace />
@@ -70,4 +67,4 @@ const UserManagement: React.FC<IUserManagementProps> = (props) => {
   );
 };
 
-export default UserManagement;
+export default BuildingManagement;
