@@ -5,13 +5,12 @@ export default defineConfig({
     type: 'none',
   },
   routes: [
-    { path: '/', component: '@/pages/index' },
-    { path: '/login', component: '@/pages/login', title: 'Login' },
     {
-      path: '/userManagement',
+      path: '/',
       component: '@/pages/userManagement',
       title: 'User Management',
     },
+    { path: '/login', component: '@/pages/login', title: 'Login' },
     {
       path: '/RegionManagement',
       component: '@/pages/RegionManagement',

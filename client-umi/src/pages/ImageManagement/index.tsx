@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImagePicker, WingBlank } from 'antd-mobile';
+import { ImagePicker, WingBlank, NavBar, Icon } from 'antd-mobile';
 import { Box } from '@/components';
 import { ImagePickerPropTypes } from 'antd-mobile/lib/image-picker/PropsType';
 
@@ -29,17 +29,26 @@ const ImageManagement: React.FC<IImageManagementProps> = (props) => {
   };
 
   return (
-    <Box>
-      <WingBlank>
-        <ImagePicker
-          files={files}
-          onChange={onChange}
-          onImageClick={(index, fs) => console.log(index, fs)}
-          selectable={files.length < 7}
-          multiple={multiple}
-        />
-      </WingBlank>
-    </Box>
+    <>
+      <NavBar
+        mode="light"
+        icon={<Icon type="left" />}
+        onLeftClick={() => console.log('onLeftClick')}
+      >
+        图片管理
+      </NavBar>
+      <Box>
+        <WingBlank>
+          <ImagePicker
+            files={files}
+            onChange={onChange}
+            onImageClick={(index, fs) => console.log(index, fs)}
+            selectable={files.length < 7}
+            multiple={multiple}
+          />
+        </WingBlank>
+      </Box>
+    </>
   );
 };
 
