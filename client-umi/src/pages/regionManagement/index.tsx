@@ -11,6 +11,7 @@ import {
   Icon,
 } from 'antd-mobile';
 import { IRegion } from '@/type';
+import HyList from "@/components/HyList";
 
 interface IRegionManagementProps {}
 
@@ -51,7 +52,8 @@ const RegionManagement: React.FC<IRegionManagementProps> = (props) => {
         <WhiteSpace />
         <Button type="primary">New</Button>
         <WhiteSpace />
-        <List>
+        <HyList data={data}/>
+        {/* <List>
           {data.map((item) => {
             return (
               <SwipeAction
@@ -79,7 +81,7 @@ const RegionManagement: React.FC<IRegionManagementProps> = (props) => {
               </SwipeAction>
             );
           })}
-        </List>
+        </List> */}
       </Box>
     </>
   );
