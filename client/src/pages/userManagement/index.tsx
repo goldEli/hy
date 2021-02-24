@@ -1,50 +1,74 @@
-import React from "react";
-import Taro, { Config } from "@tarojs/taro";
-import { View, Text, Button } from "@tarojs/components";
-import { AtList, AtListItem, AtSearchBar, AtSwipeAction } from "taro-ui";
-import { Box } from "src/components";
+import React from 'react';
+import { Box } from '@/components';
+import {
+  SearchBar,
+  Button,
+  WhiteSpace,
+  WingBlank,
+  SwipeAction,
+  List,
+  NavBar,
+  Icon,
+} from 'antd-mobile';
+import { IUser } from '@/type';
 
 interface IUserManagementProps {}
-const options: {
-  id?: string;
-  key: string;
-  text: string;
-  style: any;
-}[] = [
-  {
-    key: "modify",
-    text: "修改",
-    style: {
-      backgroundColor: "#6190E8"
-    }
-  },
-  {
-    key: "delete",
-    text: "删除",
-    style: {
-      backgroundColor: "#FF4949"
-    }
-  }
-];
 
-const UserManagement: React.FC<IUserManagementProps> = props => {
-  const [value, setValue] = React.useState("");
-  const onChange = (value: string) => {
-    setValue(value);
-  };
+const UserManagement: React.FC<IUserManagementProps> = (props) => {
+  const [data, setData] = React.useState<IUser[]>([
+    { id: '1', name: 'Shevchenko' },
+    { id: '2', name: 'Seedorf' },
+    { id: '3', name: 'Kaka' },
+    { id: '4', name: 'Inzaghi' },
+    { id: '5', name: 'Pirlo' },
+    { id: '6', name: 'Gattuso' },
+    { id: '7', name: 'Nesta' },
+  ]);
   return (
-    <Box>
-      <Text>UserManagement</Text>
-      <AtSearchBar value={value} actionName="搜一下" onChange={onChange} />
-      <AtList>
-        <AtSwipeAction
-          autoClose
-          options={options}
-        >
-          <AtListItem title="shevchenko" arrow="right" />
-        </AtSwipeAction>
-      </AtList>
-    </Box>
+    <>
+      {/* <NavBar
+        mode="light"
+        icon={<Icon type="left" />}
+        onLeftClick={() => console.log('onLeftClick')}
+      >
+        用户管理
+      </NavBar> */}
+      <Box>
+        <SearchBar placeholder="Search" maxLength={8} />
+        <WhiteSpace />
+        <Button type="primary">New</Button>
+        <WhiteSpace />
+        <List>
+          {data.map((item) => {
+            return (
+              <SwipeAction
+                key={item.id}
+                style={{ backgroundColor: 'gray' }}
+                autoClose
+                right={[
+                  {
+                    text: 'Modify',
+                    onPress: () => console.log('reply'),
+                    style: { backgroundColor: '#108ee9', color: 'white' },
+                  },
+                  {
+                    text: 'Delete',
+                    onPress: () => console.log('delete'),
+                    style: { backgroundColor: '#F4333C', color: 'white' },
+                  },
+                ]}
+                onOpen={() => console.log('global open')}
+                onClose={() => console.log('global close')}
+              >
+                <List.Item arrow="horizontal" onClick={(e) => console.log(e)}>
+                  {item.name}
+                </List.Item>
+              </SwipeAction>
+            );
+          })}
+        </List>
+      </Box>
+    </>
   );
 };
 
