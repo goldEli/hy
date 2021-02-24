@@ -35,6 +35,8 @@ const BuildingManagement: React.FC<IBuildingManagementProps> = (props) => {
         <WhiteSpace />
         <Button type="primary">New</Button>
         <WhiteSpace />
+        <Button type="primary">生成二维码</Button>
+        <WhiteSpace />
         <List>
           {data.map((item) => {
             return (

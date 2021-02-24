@@ -35,19 +35,19 @@ const HyListItem: React.FC<IHyListItemProps> = (props) => {
       right={[
         {
           text: 'Modify',
-          onPress: () => console.log('reply'),
+          onPress: () => console.log('修改'),
           style: { backgroundColor: '#108ee9', color: 'white' },
         },
         {
           text: 'Delete',
-          onPress: () => console.log('delete'),
+          onPress: () => console.log('删除'),
           style: { backgroundColor: '#F4333C', color: 'white' },
         },
       ]}
       onOpen={() => console.log('global open')}
       onClose={() => console.log('global close')}
     >
-      <List.Item arrow="horizontal" onClick={(e) => console.log(e)}>
+      <List.Item arrow="horizontal" onClick={(e) => console.log(e, 123)}>
         {props.name}
       </List.Item>
     </SwipeAction>

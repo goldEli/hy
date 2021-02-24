@@ -26,6 +26,11 @@ export default defineConfig({
       component: '@/pages/imageManagement',
       title: 'Image Management',
     },
+    {
+      path: '/showImages',
+      component: '@/pages/showImages',
+      title: 'Show Images',
+    },
   ],
   fastRefresh: {},
 });
