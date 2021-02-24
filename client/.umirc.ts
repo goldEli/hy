@@ -12,7 +12,7 @@ export default defineConfig({
     },
     { path: '/login', component: '@/pages/login', title: 'Login' },
     {
-      path: '/RegionManagement',
+      path: '/regionManagement',
       component: '@/pages/RegionManagement',
       title: 'Region Management',
     },
