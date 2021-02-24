@@ -31,6 +31,11 @@ export default defineConfig({
       component: '@/pages/showImages',
       title: 'Show Images',
     },
+    {
+      path: '/showBuildings',
+      component: '@/pages/showBuildings',
+      title: 'Show Buildings',
+    },
   ],
   fastRefresh: {},
 });
