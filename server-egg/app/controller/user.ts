@@ -7,7 +7,8 @@ export default class UserController extends BaseController {
       { id: user.id, name: user.name },
       this.app.config.jwt.secret
     );
-    return token
+    // console.log("user id controller ", user.id);
+    return token;
   }
   public async add() {
     const name = this.ctx.params("name");
@@ -25,7 +26,9 @@ export default class UserController extends BaseController {
       return;
     }
 
-    const token = await this.getToken({id: user.id, name: user.name})
-    this.success({ token });
+    // const token = await this.getToken({id: user.id, name: user.name})
+
+    this.ctx.session[user.id] = 1;
+    this.success({});
   }
 }

@@ -36,12 +36,22 @@ export default (appInfo: EggAppInfo) => {
       enable: false,
     },
   };
-  
+
   config.jwt = {
-    secret: "hy123456"
-  }
+    secret: "hy123456",
+  };
+
+  config.session = {
+    key: "EGG_SESS",
+    maxAge: 24 * 3600 * 1000, // 1 天
+    httpOnly: true,
+    encrypt: true,
+  };
+  config.auth = {
+    exclude: ["/api/user/login", "/api/user/register"],
+  };
   // add your egg config in here
-  config.middleware = [];
+  config.middleware = ["auth"];
 
   // add your special config in here
   const bizConfig = {
