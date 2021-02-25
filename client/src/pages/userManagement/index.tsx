@@ -26,13 +26,13 @@ const UserManagement: React.FC<IUserManagementProps> = (props) => {
   ]);
   return (
     <>
-      {/* <NavBar
+      <NavBar
         mode="light"
-        icon={<Icon type="left" />}
-        onLeftClick={() => console.log('onLeftClick')}
+        // icon={<Icon type="left" />}
+        // onLeftClick={() => console.log('onLeftClick')}
       >
         用户管理
-      </NavBar> */}
+      </NavBar>
       <Box>
         <SearchBar placeholder="Search" maxLength={8} />
         <WhiteSpace />

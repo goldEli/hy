@@ -10,6 +10,16 @@ const Brief = Item.Brief;
 const ImgBox = styled.img`
   width: 100%;
 `;
+const data = [
+  {
+    url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
+    id: '2121',
+  },
+  {
+    url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
+    id: '2122',
+  },
+];
 
 const ShowImages: React.FC<IShowImagesProps> = (props) => {
   return (
@@ -23,16 +33,15 @@ const ShowImages: React.FC<IShowImagesProps> = (props) => {
       </NavBar>
       <WingBlank size="lg">
         <WhiteSpace size="lg" />
-        <Card>
-          <Card.Body>
-            <ImgBox src={require('../../assets/pig.png')} alt="" />
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Body>
-            <ImgBox src={require('../../assets/pig.png')} alt="" />
-          </Card.Body>
-        </Card>
+        {data.map((item) => {
+          return (
+            <Card key={item.id}>
+              <Card.Body>
+                <ImgBox src={item.url} alt="" />
+              </Card.Body>
+            </Card>
+          );
+        })}
         <WhiteSpace size="lg" />
       </WingBlank>
     </div>

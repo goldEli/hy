@@ -7,15 +7,15 @@ interface ILoginProps {}
 const Login: React.FC<ILoginProps> = (props) => {
   return (
     <Box>
-      <List renderHeader={() => 'Login'}>
-        <InputItem type="text" placeholder="username">
-          username
+      <List renderHeader={() => '登录'}>
+        <InputItem type="text" placeholder="请输入账号">
+          账号
         </InputItem>
-        <InputItem type="password" placeholder="password">
-          password
+        <InputItem type="password" placeholder="请输入密码">
+          密码
         </InputItem>
       </List>
-      <Button type="primary">Login</Button>
+      <Button type="primary">登录</Button>
     </Box>
   );
 };
