@@ -1,5 +1,4 @@
-
-import { Controller } from 'egg';
+import { Controller } from "egg";
 
 export default class ClientsController extends Controller {
   public async list() {
