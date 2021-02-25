@@ -18,7 +18,9 @@ export default class Clients extends Service {
     return result;
   }
   public async del(params: Pick<IClient, "id">) {
-    const result = await this.ctx.model.Clients.create(params.id);
+    const result = await this.ctx.model.Clients.destroy({
+      where: { id: params.id },
+    });
     return result;
   }
   public async update(params: IClient) {
