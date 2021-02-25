@@ -7,6 +7,7 @@ import 'egg-session';
 import 'egg-i18n';
 import 'egg-watcher';
 import 'egg-multipart';
+import 'egg-security';
 import 'egg-development';
 import 'egg-logrotator';
 import 'egg-schedule';
@@ -15,6 +16,7 @@ import 'egg-jsonp';
 import 'egg-view';
 import 'egg-mysql';
 import 'egg-sequelize';
+import 'egg-jwt';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -32,5 +34,6 @@ declare module 'egg' {
     view?: EggPluginItem;
     mysql?: EggPluginItem;
     sequelize?: EggPluginItem;
+    jwt?: EggPluginItem;
   }
 }

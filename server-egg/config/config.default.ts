@@ -30,6 +30,16 @@ export default (appInfo: EggAppInfo) => {
       freezeTableName: true,
     },
   };
+
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+  
+  config.jwt = {
+    secret: "hy123456"
+  }
   // add your egg config in here
   config.middleware = [];
 
