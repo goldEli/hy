@@ -1,20 +1,24 @@
-import { Controller } from "egg";
+import BaseController from "./base";
 
-export default class ClientsController extends Controller {
+export default class ClientsController extends BaseController {
   public async list() {
     const { ctx } = this;
-    ctx.body = await ctx.service.clients.getAll();
+    const res = await ctx.service.clients.getAll();
+    this.success(res);
   }
   public async add() {
-    const name = this.ctx.params("name")
-    this.ctx.body = await this.ctx.service.clients.add({name})
+    const name = this.ctx.params("name");
+    const res = await this.ctx.service.clients.add({ name });
+    this.success(res);
   }
   public async del() {
-    const id = this.ctx.params("id")
-    this.ctx.body = await this.ctx.service.clients.del({id})
+    const id = this.ctx.params("id");
+    const res = await this.ctx.service.clients.del({ id });
+    this.success(res);
   }
   public async update() {
-    const params = this.ctx.params()
-    this.ctx.body = await this.ctx.service.clients.update(params)
+    const params = this.ctx.params();
+    const res = await this.ctx.service.clients.update(params);
+    this.success(res);
   }
 }

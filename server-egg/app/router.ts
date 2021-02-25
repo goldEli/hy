@@ -4,8 +4,12 @@ export default (app: Application) => {
   const { controller, router } = app;
 
   router.get("/", controller.home.index);
+
   router.get("/api/clients/list", controller.clients.list);
   router.post("/api/clients/add", controller.clients.add);
   router.post("/api/clients/del", controller.clients.del);
   router.post("/api/clients/update", controller.clients.update);
+
+  router.post("/api/user/add", controller.user.add);
+  router.post("/api/user/login", controller.user.login);
 };
