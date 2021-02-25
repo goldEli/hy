@@ -36,7 +36,7 @@ const UserManagement: React.FC<IUserManagementProps> = (props) => {
       <Box>
         <SearchBar placeholder="Search" maxLength={8} />
         <WhiteSpace />
-        <Button type="primary">New</Button>
+        <Button type="primary">新增</Button>
         <WhiteSpace />
         <List>
           {data.map((item) => {

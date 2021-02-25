@@ -17,26 +17,10 @@ interface IRegionManagementProps {}
 
 const RegionManagement: React.FC<IRegionManagementProps> = (props) => {
   const [data, setData] = React.useState<IRegion[]>([
-    { id: '1', name: '配电站' },
+    { id: '1', name: '配电厂' },
     { id: '2', name: '调压柜' },
     { id: '3', name: '配气站' },
     { id: '4', name: '办公区域' },
-    { id: 'q', name: '办公区域' },
-    { id: 'w', name: '办公区域' },
-    { id: '5', name: '办公区域' },
-    { id: 'a', name: '办公区域' },
-    { id: 'r', name: '办公区域' },
-    { id: 'd', name: '办公区域' },
-    { id: 'f', name: '办公区域' },
-    { id: 'z', name: '办公区域' },
-    { id: 'x', name: '办公区域' },
-    { id: 'c', name: '办公区域' },
-    { id: 'v', name: '办公区域' },
-    { id: 'b', name: '办公区域' },
-    { id: 't', name: '办公区域' },
-    { id: 'y', name: '办公区域' },
-    { id: 'u', name: '办公区域' },
-    { id: 'i', name: '办公区域' },
   ]);
   return (
     <>
@@ -50,7 +34,7 @@ const RegionManagement: React.FC<IRegionManagementProps> = (props) => {
       <Box>
         <SearchBar placeholder="Search" maxLength={8} />
         <WhiteSpace />
-        <Button type="primary">New</Button>
+        <Button type="primary">新增</Button>
         <WhiteSpace />
         <HyList data={data}/>
         {/* <List>
