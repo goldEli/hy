@@ -1,15 +1,10 @@
 import React, { useEffect } from 'react';
 import { Box } from '@/components';
-import {
-  SearchBar,
-  WhiteSpace,
-  SwipeAction,
-  List,
-  NavBar,
-} from 'antd-mobile';
+import { SearchBar, WhiteSpace, SwipeAction, List, NavBar } from 'antd-mobile';
 import { useQuery } from 'react-query';
 import { API_CLIENTS_LIST, getClients, IClient } from '@/api/clients';
 import AddButton from './components/AddButton';
+import HyList from '@/components/HyList';
 
 interface IClientsManagementProps {}
 
@@ -29,35 +24,7 @@ const ClientsManagement: React.FC<IClientsManagementProps> = (props) => {
         <WhiteSpace />
         <AddButton />
         <WhiteSpace />
-        <List>
-          {data?.map((item) => {
-            return (
-              <SwipeAction
-                key={item.id}
-                style={{ backgroundColor: 'gray' }}
-                autoClose
-                right={[
-                  {
-                    text: 'Modify',
-                    onPress: () => console.log('reply'),
-                    style: { backgroundColor: '#108ee9', color: 'white' },
-                  },
-                  {
-                    text: 'Delete',
-                    onPress: () => console.log('delete'),
-                    style: { backgroundColor: '#F4333C', color: 'white' },
-                  },
-                ]}
-                onOpen={() => console.log('global open')}
-                onClose={() => console.log('global close')}
-              >
-                <List.Item arrow="horizontal" onClick={(e) => console.log(e)}>
-                  {item.name}
-                </List.Item>
-              </SwipeAction>
-            );
-          })}
-        </List>
+        <HyList data={data || []} />
       </Box>
     </>
   );

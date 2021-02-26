@@ -30,16 +30,15 @@ const HyListItem: React.FC<IHyListItemProps> = (props) => {
   return (
     <SwipeAction
       key={props.id}
-      style={{ backgroundColor: 'gray' }}
       autoClose
       right={[
         {
-          text: 'Modify',
+          text: '修改',
           onPress: () => console.log('修改'),
           style: { backgroundColor: '#108ee9', color: 'white' },
         },
         {
-          text: 'Delete',
+          text: '删除',
           onPress: () => console.log('删除'),
           style: { backgroundColor: '#F4333C', color: 'white' },
         },

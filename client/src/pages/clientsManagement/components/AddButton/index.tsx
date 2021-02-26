@@ -1,14 +1,14 @@
 import React from 'react';
 import { Button, Modal, Toast } from 'antd-mobile';
-import { http } from '@/utils/http';
-import { useQueryClient } from "react-query";
-import { API_CLIENTS_LIST } from '@/api/clients';
+import { useMutation, useQueryClient } from 'react-query';
+import { addClient, API_CLIENTS_LIST, IClient } from '@/api/clients';
 const { prompt } = Modal;
 
 interface IAddButtonProps {}
 
 const AddButton: React.FC<IAddButtonProps> = (props) => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
+  const mutation = useMutation(addClient);
   return (
     <Button
       type="primary"
@@ -23,25 +23,30 @@ const AddButton: React.FC<IAddButtonProps> = (props) => {
               onPress: (value) =>
                 new Promise((resolve, reject) => {
                   Toast.loading('请稍后...', 30);
-                  http('/api/clients/add', {
-                    method: 'post',
-                    data: { name: value },
-                  })
-                    .then(() => {
-                      Toast.info('新增成功');
-                      queryClient.invalidateQueries(API_CLIENTS_LIST)
+                  mutation
+                    .mutateAsync({ name: value })
+                    .then((data: IClient) => {
+                      Toast.info('新增成功', 1);
+                      const prev = queryClient.getQueryData<IClient[]>(
+                        API_CLIENTS_LIST,
+                      );
+                      if (prev) {
+                        queryClient.setQueryData<IClient[]>(API_CLIENTS_LIST, [
+                          ...prev,
+                          data,
+                        ]);
+                      }
                       resolve(value);
                     })
-                    .catch((message) => {
-                      // Toast.hide()
-                      Toast.fail(message);
+                    .catch((data) => {
+                      Toast.fail(typeof data === 'string' ? data : '新增失败');
                       reject();
                     });
                 }),
             },
           ],
           'default',
-          "",
+          '',
           ['用户名称'],
         )
       }
