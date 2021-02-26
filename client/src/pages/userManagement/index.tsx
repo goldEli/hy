@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box } from '@/components';
 import {
   SearchBar,
@@ -11,6 +11,7 @@ import {
   Icon,
 } from 'antd-mobile';
 import { IUser } from '@/type';
+import { http } from '@/utils/http';
 
 interface IUserManagementProps {}
 
@@ -24,6 +25,9 @@ const UserManagement: React.FC<IUserManagementProps> = (props) => {
     { id: '6', name: 'Gattuso' },
     { id: '7', name: 'Nesta' },
   ]);
+  useEffect(() => {
+    http("/api/clients/list")
+  }, [])
   return (
     <>
       <NavBar
