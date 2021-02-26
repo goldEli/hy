@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, Modal } from 'antd-mobile';
-import useAdd from './useAdd';
+import { useAddClient } from '@/api/clients';
 const { prompt } = Modal;
 
 interface IAddButtonProps {}
 
 const AddButton: React.FC<IAddButtonProps> = (props) => {
-  const { add } = useAdd();
+  const { add } = useAddClient();
   return (
     <Button
       type="primary"

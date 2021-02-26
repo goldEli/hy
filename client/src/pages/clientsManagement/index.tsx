@@ -2,7 +2,13 @@ import React, { useEffect } from 'react';
 import { Box } from '@/components';
 import { SearchBar, WhiteSpace, SwipeAction, List, NavBar } from 'antd-mobile';
 import { useQuery } from 'react-query';
-import { API_CLIENTS_LIST, getClients, IClient } from '@/api/clients';
+import {
+  API_CLIENTS_LIST,
+  getClients,
+  IClient,
+  useDelClient,
+  useUpdateClient,
+} from '@/api/clients';
 import AddButton from './components/AddButton';
 import HyList from '@/components/HyList';
 
@@ -10,6 +16,8 @@ interface IClientsManagementProps {}
 
 const ClientsManagement: React.FC<IClientsManagementProps> = (props) => {
   const { data } = useQuery<IClient[]>(API_CLIENTS_LIST, getClients);
+  const { del } = useDelClient();
+  const { update } = useUpdateClient();
   return (
     <>
       <NavBar
@@ -24,7 +32,7 @@ const ClientsManagement: React.FC<IClientsManagementProps> = (props) => {
         <WhiteSpace />
         <AddButton />
         <WhiteSpace />
-        <HyList data={data || []} />
+        <HyList del={del} update={update} data={data || []} />
       </Box>
     </>
   );

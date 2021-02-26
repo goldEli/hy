@@ -1,55 +1,54 @@
 import React from 'react';
-import { Popover, SwipeAction, List } from 'antd-mobile';
-
-const Item = Popover.Item;
-
-const myImg = (src: string) => (
-  <img
-    src={`https://gw.alipayobjects.com/zos/rmsportal/${src}.svg`}
-    className="am-icon am-icon-xs"
-    alt=""
-  />
-);
+import { Button, List, Modal, Icon } from 'antd-mobile';
+import {
+  IClient,
+  useAddClient,
+  useDelClient,
+  useUpdateClient,
+} from '@/api/clients';
 
 interface IHyListItemProps {
   id: string;
   name: string;
+  update: (data: IClient) => void;
+  del: (id: string) => void;
 }
 
 const HyListItem: React.FC<IHyListItemProps> = (props) => {
-  const [visible, setVisible] = React.useState(false);
-  const [selected, setSelected] = React.useState('');
-  const onSelect = (opt: any) => {
-    // console.log(opt.props.value);
-    setVisible(false);
-    setSelected(opt.props.value);
+  const { del } = useDelClient();
+  const { update } = useUpdateClient();
+  const onOptions = (e: any) => {
+    e.stopPropagation();
+    Modal.operation([
+      { text: '删除', onPress: () => del(props.id) },
+      {
+        text: '修改',
+        onPress: () =>
+          Modal.prompt(
+            '修改',
+            '请输入用户名称',
+            [
+              { text: '取消' },
+              {
+                text: '确定',
+                onPress: (value) => update({ name: value, id: props.id }),
+              },
+            ],
+            'default',
+            props.name,
+            ['用户名称'],
+          ),
+      },
+    ]);
   };
-  const handleVisibleChange = (visible: boolean) => {
-    setVisible(visible);
-  };
+
   return (
-    <SwipeAction
-      key={props.id}
-      autoClose
-      right={[
-        {
-          text: '修改',
-          onPress: () => console.log('修改'),
-          style: { backgroundColor: '#108ee9', color: 'white' },
-        },
-        {
-          text: '删除',
-          onPress: () => console.log('删除'),
-          style: { backgroundColor: '#F4333C', color: 'white' },
-        },
-      ]}
-      onOpen={() => console.log('global open')}
-      onClose={() => console.log('global close')}
+    <List.Item
+      onClick={(e) => console.log(123)}
+      extra={<Icon onClick={onOptions} type="ellipsis" />}
     >
-      <List.Item arrow="horizontal" onClick={(e) => console.log(e, 123)}>
-        {props.name}
-      </List.Item>
-    </SwipeAction>
+      {props.name}
+    </List.Item>
   );
 };
 

@@ -1,23 +1,30 @@
 import React from 'react';
-import { Popover, NavBar, Icon } from 'antd-mobile';
+import { List } from 'antd-mobile';
 import HyListItem from './HyListItem';
+import { IClient } from '@/api/clients';
 
-
-interface IListProps {
-  data: {id:string, name:string}[]
+interface IHyListProps {
+  data: { id: string; name: string }[];
+  update: (data: IClient) => void;
+  del: (id: string) => void;
 }
 
-const List: React.FC<IListProps> = (props) => {
-
+const HyList: React.FC<IHyListProps> = (props) => {
   return (
-    <>
-      {
-        props.data.map(item => {
-          return <HyListItem key={item.id} id={item.id} name={item.name}/>
-        })
-      }
-    </>
-  )
+    <List>
+      {props.data.map((item) => {
+        return (
+          <HyListItem
+            update={props.update}
+            del={props.del}
+            key={item.id}
+            id={item.id}
+            name={item.name}
+          />
+        );
+      })}
+    </List>
+  );
 };
 
-export default List;
+export default HyList;
