@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Box } from '@/components';
 import {
   SearchBar,
-  Button,
   WhiteSpace,
   SwipeAction,
   List,
@@ -10,6 +9,7 @@ import {
 } from 'antd-mobile';
 import { useQuery } from 'react-query';
 import { API_CLIENTS_LIST, getClients, IClient } from '@/api/clients';
+import AddButton from './components/AddButton';
 
 interface IClientsManagementProps {}
 
@@ -27,7 +27,7 @@ const ClientsManagement: React.FC<IClientsManagementProps> = (props) => {
       <Box>
         <SearchBar placeholder="Search" maxLength={8} />
         <WhiteSpace />
-        <Button type="primary">新增</Button>
+        <AddButton />
         <WhiteSpace />
         <List>
           {data?.map((item) => {

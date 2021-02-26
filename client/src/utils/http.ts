@@ -36,6 +36,9 @@ export const http = (url: string, { data, ...customConfig }: IConfig = {}) => {
       if (data.status === 200) {
         return data.data;
       }
+      if (data.status === 500) {
+        return Promise.reject(data.errMsg);
+      }
       return Promise.reject(data);
     } else {
       return Promise.reject(data);
