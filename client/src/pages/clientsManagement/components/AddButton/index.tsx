@@ -1,14 +1,12 @@
 import React from 'react';
-import { Button, Modal, Toast } from 'antd-mobile';
-import { useMutation, useQueryClient } from 'react-query';
-import { addClient, API_CLIENTS_LIST, IClient } from '@/api/clients';
+import { Button, Modal } from 'antd-mobile';
+import useAdd from './useAdd';
 const { prompt } = Modal;
 
 interface IAddButtonProps {}
 
 const AddButton: React.FC<IAddButtonProps> = (props) => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation(addClient);
+  const { add } = useAdd();
   return (
     <Button
       type="primary"
@@ -20,29 +18,7 @@ const AddButton: React.FC<IAddButtonProps> = (props) => {
             { text: '取消' },
             {
               text: '确定',
-              onPress: (value) =>
-                new Promise((resolve, reject) => {
-                  Toast.loading('请稍后...', 30);
-                  mutation
-                    .mutateAsync({ name: value })
-                    .then((data: IClient) => {
-                      Toast.info('新增成功', 1);
-                      const prev = queryClient.getQueryData<IClient[]>(
-                        API_CLIENTS_LIST,
-                      );
-                      if (prev) {
-                        queryClient.setQueryData<IClient[]>(API_CLIENTS_LIST, [
-                          ...prev,
-                          data,
-                        ]);
-                      }
-                      resolve(value);
-                    })
-                    .catch((data) => {
-                      Toast.fail(typeof data === 'string' ? data : '新增失败');
-                      reject();
-                    });
-                }),
+              onPress: (value) => add(value),
             },
           ],
           'default',
