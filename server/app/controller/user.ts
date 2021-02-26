@@ -28,7 +28,7 @@ export default class UserController extends BaseController {
 
     // const token = await this.getToken({id: user.id, name: user.name})
 
-    this.ctx.session[user.id] = 1;
+    this.ctx.session.visited = 1;
     this.success({});
   }
 }

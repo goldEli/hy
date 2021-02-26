@@ -1,5 +1,5 @@
 import qs from 'qs';
-
+import { history } from 'umi';
 // const apiUrl = process.env.REACT_APP_API_URL;
 interface IConfig extends RequestInit {
   // token?: string;
@@ -29,8 +29,14 @@ export const http = (url: string, { data, ...customConfig }: IConfig = {}) => {
     //   return Promise.reject({ message: '请重新登录' });
     // }
     const data = await response.json();
-    if (response.ok && data.status === 200) {
-      return data;
+    if (response.ok) {
+      if (data.status === 1001) {
+        history.push('/login');
+      }
+      if (data.status === 200) {
+        return data;
+      }
+      return Promise.reject(data);
     } else {
       return Promise.reject(data);
     }
