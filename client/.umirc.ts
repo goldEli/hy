@@ -22,7 +22,7 @@ export default defineConfig({
       routes: [
         {
           path: '/',
-          component: '@/pages/userManagement',
+          component: '@/pages/ClientsManagement',
           title: '用户管理',
         },
         { path: '/login', component: '@/pages/login', title: 'Login' },

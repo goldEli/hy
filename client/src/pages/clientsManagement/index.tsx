@@ -8,15 +8,13 @@ import {
   List,
   NavBar,
 } from 'antd-mobile';
-import { IUser } from '@/type';
-import { http } from '@/utils/http';
 import { useQuery } from 'react-query';
 import { API_CLIENTS_LIST, getClients, IClient } from '@/api/clients';
 
-interface IUserManagementProps {}
+interface IClientsManagementProps {}
 
-const UserManagement: React.FC<IUserManagementProps> = (props) => {
-  const { data } = useQuery<IClient>(API_CLIENTS_LIST, getClients);
+const ClientsManagement: React.FC<IClientsManagementProps> = (props) => {
+  const { data } = useQuery<IClient[]>(API_CLIENTS_LIST, getClients);
   return (
     <>
       <NavBar
@@ -65,4 +63,4 @@ const UserManagement: React.FC<IUserManagementProps> = (props) => {
   );
 };
 
-export default UserManagement;
+export default ClientsManagement;
