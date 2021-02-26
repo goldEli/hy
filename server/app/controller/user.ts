@@ -1,15 +1,15 @@
-import { IUser } from "../model/user";
+// import { IUser } from "../model/user";
 import BaseController from "./base";
 
 export default class UserController extends BaseController {
-  async getToken(user: Omit<IUser, "password">) {
-    const token = await this.app.jwt.sign(
-      { id: user.id, name: user.name },
-      this.app.config.jwt.secret
-    );
-    // console.log("user id controller ", user.id);
-    return token;
-  }
+  // async getToken(user: Omit<IUser, "password">) {
+  //   const token = await this.app.jwt.sign(
+  //     { id: user.id, name: user.name },
+  //     this.app.config.jwt.secret
+  //   );
+  //   // console.log("user id controller ", user.id);
+  //   return token;
+  // }
   public async add() {
     const name = this.ctx.params("name");
     const password = this.ctx.params("password");
