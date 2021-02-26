@@ -34,7 +34,7 @@ export const http = (url: string, { data, ...customConfig }: IConfig = {}) => {
         history.push('/login');
       }
       if (data.status === 200) {
-        return data;
+        return data.data;
       }
       return Promise.reject(data);
     } else {

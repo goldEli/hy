@@ -4,30 +4,19 @@ import {
   SearchBar,
   Button,
   WhiteSpace,
-  WingBlank,
   SwipeAction,
   List,
   NavBar,
-  Icon,
 } from 'antd-mobile';
 import { IUser } from '@/type';
 import { http } from '@/utils/http';
+import { useQuery } from 'react-query';
+import { API_CLIENTS_LIST, getClients, IClient } from '@/api/clients';
 
 interface IUserManagementProps {}
 
 const UserManagement: React.FC<IUserManagementProps> = (props) => {
-  const [data, setData] = React.useState<IUser[]>([
-    { id: '1', name: 'Shevchenko' },
-    { id: '2', name: 'Seedorf' },
-    { id: '3', name: 'Kaka' },
-    { id: '4', name: 'Inzaghi' },
-    { id: '5', name: 'Pirlo' },
-    { id: '6', name: 'Gattuso' },
-    { id: '7', name: 'Nesta' },
-  ]);
-  useEffect(() => {
-    http("/api/clients/list")
-  }, [])
+  const { data } = useQuery<IClient>(API_CLIENTS_LIST, getClients);
   return (
     <>
       <NavBar
@@ -43,7 +32,7 @@ const UserManagement: React.FC<IUserManagementProps> = (props) => {
         <Button type="primary">新增</Button>
         <WhiteSpace />
         <List>
-          {data.map((item) => {
+          {data?.map((item) => {
             return (
               <SwipeAction
                 key={item.id}

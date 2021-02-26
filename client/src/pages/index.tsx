@@ -1,9 +1,20 @@
-import styles from './index.less';
+import React from 'react';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query';
 
-export default function IndexPage() {
+// Create a client
+const queryClient = new QueryClient();
+
+interface IIndexProps {}
+
+const Index: React.FC<IIndexProps> = (props) => {
   return (
-    <div>
-      <h1 className={styles.title}>Page index</h1>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      {props.children}
+    </QueryClientProvider>
   );
-}
+};
+
+export default Index;
