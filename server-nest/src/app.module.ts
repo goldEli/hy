@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PostsModule } from './posts/posts.module';
-import { ClientModule } from './client/client.module';
+import { PostsModule } from './modules/posts/posts.module';
+import { ClientModule } from './modules/client/client.module';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Client } from './client/client.model';
+import { Client } from './modules/client/client.model';
 // import { Client } from './client/client.entity';
 
 @Module({
