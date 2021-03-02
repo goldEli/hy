@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
 } from '@nestjs/common';
@@ -42,7 +43,7 @@ export class ClientController {
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete client' })
-  async del(@Param('id') id: number) {
+  async del(@Param('id', ParseIntPipe) id: number) {
     await this.clientService.remove(id);
     return {};
   }
