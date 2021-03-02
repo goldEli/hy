@@ -27,11 +27,7 @@ export class ClientController {
   @ApiOperation({ summary: 'Create client' })
   async create(@Body() createClientDto: CreateClientDto) {
     const res = await this.clientService.create(createClientDto);
-    return {
-      status: 200,
-      message: 'success',
-      data: res,
-    };
+    return res;
   }
 
   @Put(':id')
@@ -41,20 +37,13 @@ export class ClientController {
     @Body() createClientDto: CreateClientDto,
   ) {
     const res = await this.clientService.update(id, createClientDto);
-    return {
-      status: 200,
-      message: 'success',
-      data: res,
-    };
+    return res;
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete client' })
   async del(@Param('id') id: number) {
     await this.clientService.remove(id);
-    return {
-      status: 200,
-      message: 'success',
-    };
+    return {};
   }
 }
