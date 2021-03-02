@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateClientDto } from './client.controller';
 import { Client } from './client.model';
 
 @Injectable()
@@ -22,11 +21,11 @@ export class ClientService {
     return this.clientModel.destroy({ where: { id } });
   }
 
-  update(id: number, client: Client): Promise<[number, Client[]]> {
+  update(id: number, client): Promise<[number, Client[]]> {
     return this.clientModel.update({ name: client.name }, { where: { id } });
   }
 
-  create(client: Client): Promise<Client> {
+  create(client): Promise<Client> {
     return this.clientModel.create(client);
   }
 }
