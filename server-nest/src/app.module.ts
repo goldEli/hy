@@ -1,28 +1,25 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PostsModule } from './modules/posts/posts.module';
 import { ClientModule } from './modules/client/client.module';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { Client } from './modules/client/client.model';
 import { UserModule } from './modules/user/user.module';
-import { User } from './modules/user/user.model';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { getConnectionOptions } from 'typeorm';
+import { User } from './modules/user/user.entity';
+import { Client } from './modules/client/client.entity';
 
 @Module({
   imports: [
-    SequelizeModule.forRoot({
-      dialect: 'mysql',
+    TypeOrmModule.forRoot({
+      type: 'mysql',
       host: 'localhost',
       port: 3306,
       username: 'root',
       password: '123456',
       database: 'hy',
-      models: [Client, User],
-      define: {
-        timestamps: false,
-      },
+      entities: [User, Client],
+      synchronize: true,
     }),
-    PostsModule,
     ClientModule,
     UserModule,
   ],

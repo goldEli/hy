@@ -1,11 +1,5 @@
-import {
-  Body,
-  Controller,
-  createParamDecorator,
-  HttpException,
-  Post,
-} from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { errorResponse, successResponse } from 'src/utils';
 import { LoginDto } from './dto/login.dto';
 import { UserService } from './user.service';

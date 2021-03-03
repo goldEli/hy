@@ -1,17 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { User } from './user.model';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel(User)
-    private userModel: typeof User,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
   ) {}
   findOne(user): Promise<User> {
-    return this.userModel.findOne({ where: user });
+    return this.userRepository.findOne(user);
   }
   create(user): Promise<User> {
-    return this.userModel.create(user);
+    return this.userRepository.save(user);
   }
 }

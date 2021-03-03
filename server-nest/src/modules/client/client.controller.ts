@@ -9,8 +9,8 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Client } from './client.entity';
 import { ClientService } from './client.service';
-import { Client } from './client.model';
 import { CreateClientDto } from './dto/create-client.dto';
 
 @Controller('client')
