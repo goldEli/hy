@@ -22,6 +22,10 @@ export class UserController {
   @ApiOperation({ summary: 'User register' })
   async register(@Body() user: LoginDto) {
     const { password, ...res } = await this.userService.create(user);
-    return successResponse({ message: 'register success', data: res });
+    const token = await this.userService.login(user);
+    return successResponse({
+      message: 'register success',
+      data: { ...res, token },
+    });
   }
 }
