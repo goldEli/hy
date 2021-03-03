@@ -1,6 +1,5 @@
-export interface Response<T> {
+export interface IResponse<T> {
   data: T;
   status: number;
   message: string;
-  timeStamp: number;
 }
