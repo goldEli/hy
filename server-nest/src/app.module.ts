@@ -4,13 +4,14 @@ import { AppService } from './app.service';
 import { ClientModule } from './modules/client/client.module';
 import { UserModule } from './modules/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { getConnectionOptions } from 'typeorm';
+import { Connection } from 'typeorm';
 import { User } from './modules/user/user.entity';
 import { Client } from './modules/client/client.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
+      retryAttempts: 1,
       type: 'mysql',
       host: 'localhost',
       port: 3306,
@@ -26,4 +27,6 @@ import { Client } from './modules/client/client.entity';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private readonly connection: Connection) {}
+}
