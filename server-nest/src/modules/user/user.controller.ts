@@ -13,14 +13,15 @@ export class UserController {
   @ApiOperation({ summary: 'User login' })
   async login(@Body() user: LoginDto) {
     const res = await this.userService.findOne(user);
-    if (!res) return errorResponse({ message: 'not fount' });
+    if (!res) return errorResponse({ message: 'user or password error' });
 
     return successResponse({ message: 'login success' });
   }
 
   @Post('register')
   @ApiOperation({ summary: 'User register' })
-  register() {
-    return 'register success';
+  async register(@Body() user: LoginDto) {
+    const { password, ...res } = await this.userService.create(user);
+    return successResponse({ message: 'register success', data: res });
   }
 }
