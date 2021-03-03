@@ -7,6 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
+import { LocalStrategy } from './local.strategy';
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import { jwtConstants } from './constants';
     }),
   ],
   controllers: [UserController],
-  providers: [UserService],
+  providers: [UserService, LocalStrategy],
 })
 export class UserModule {}
