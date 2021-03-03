@@ -17,8 +17,8 @@ async function bootstrap() {
   // app.useGlobalFilters(new HttpExceptionFilter());
 
   // app.useGlobalInterceptors(new LoggingInterceptor());
-  app.useGlobalInterceptors(new TransformInterceptor());
-  app.useGlobalInterceptors(new ErrorsInterceptor());
+  // app.useGlobalInterceptors(new TransformInterceptor());
+  // app.useGlobalInterceptors(new ErrorsInterceptor());
 
   const config = new DocumentBuilder()
     .setTitle('hy')
