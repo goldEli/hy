@@ -37,7 +37,7 @@ export const http = (url: string, { data, ...customConfig }: IConfig = {}) => {
         return data.data;
       }
       if (data.status === 500) {
-        return Promise.reject(data.errMsg);
+        return Promise.reject(data.message);
       }
       return Promise.reject(data);
     } else {

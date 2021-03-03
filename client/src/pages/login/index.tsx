@@ -37,8 +37,8 @@ const Login: React.FC<ILoginProps> = (props) => {
       .then(() => {
         history.push('/');
       })
-      .catch((data) => {
-        Toast.fail(data.errMsg);
+      .catch((message) => {
+        Toast.fail(message);
       });
   };
 
