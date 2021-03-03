@@ -8,7 +8,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ClientService } from './client.service';
 import { Client } from './client.model';
 import { CreateClientDto } from './dto/create-client.dto';

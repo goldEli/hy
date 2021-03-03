@@ -5,7 +5,8 @@ import { PostsModule } from './modules/posts/posts.module';
 import { ClientModule } from './modules/client/client.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Client } from './modules/client/client.model';
-// import { Client } from './client/client.entity';
+import { UserModule } from './modules/user/user.module';
+import { User } from './modules/user/user.model';
 
 @Module({
   imports: [
@@ -16,13 +17,14 @@ import { Client } from './modules/client/client.model';
       username: 'root',
       password: '123456',
       database: 'hy',
-      models: [Client],
+      models: [Client, User],
       define: {
         timestamps: false,
       },
     }),
     PostsModule,
     ClientModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
