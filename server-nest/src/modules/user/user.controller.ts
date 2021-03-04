@@ -1,4 +1,11 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { errorResponse, successResponse } from 'src/utils';
 import { LoginDto } from './dto/login.dto';
@@ -17,17 +24,24 @@ export class UserController {
     // const res = await this.userService.findOne(user);
     // if (!res) return errorResponse({ message: 'user or password error' });
 
-    return successResponse({ message: 'login success' });
+    const token = await this.userService.login(user);
+    return successResponse({ message: 'login success', data: token });
   }
 
   @Post('register')
   @ApiOperation({ summary: 'User register' })
   async register(@Body() user: LoginDto) {
     const { password, ...res } = await this.userService.create(user);
-    const token = await this.userService.login(user);
     return successResponse({
       message: 'register success',
-      data: { ...res, token },
+      data: { ...res },
     });
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get()
+  @ApiOperation({ summary: 'User list' })
+  index(@Request() req) {
+    return this.userService.getAll();
   }
 }

@@ -7,10 +7,11 @@ interface IConfig extends RequestInit {
 }
 
 export const http = (url: string, { data, ...customConfig }: IConfig = {}) => {
+  const token = localStorage.getItem('token');
   const config = {
     method: 'GET',
     headers: {
-      // Authorization: token ? `Bearer ${token}` : "",
+      Authorization: token ? `Bearer ${token}` : '',
       'Content-Type': 'application/json',
     },
     ...customConfig,
@@ -23,11 +24,11 @@ export const http = (url: string, { data, ...customConfig }: IConfig = {}) => {
   }
 
   return fetch(url, config).then(async (response) => {
-    // if (response.status === 401) {
-    //   // await auth.logout();
-    //   window.location.reload();
-    //   return Promise.reject({ message: '请重新登录' });
-    // }
+    if (response.status === 401) {
+      // await auth.logout();
+      window.location.reload();
+      return Promise.reject({ message: '请重新登录' });
+    }
     const data = await response.json();
     if (response.ok) {
       if (data.status === 1001) {

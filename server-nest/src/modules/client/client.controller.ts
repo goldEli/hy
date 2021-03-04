@@ -7,7 +7,9 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Client } from './client.entity';
 import { ClientService } from './client.service';
@@ -18,6 +20,7 @@ import { CreateClientDto } from './dto/create-client.dto';
 export class ClientController {
   constructor(private clientService: ClientService) {}
 
+  @UseGuards(AuthGuard('local'))
   @Get()
   @ApiOperation({ summary: 'Get list of clients' })
   index(): Promise<Client[]> {

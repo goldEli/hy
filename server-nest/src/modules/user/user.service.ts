@@ -11,6 +11,9 @@ export class UserService {
     private userRepository: Repository<User>,
     private jwtService: JwtService,
   ) {}
+  getAll() {
+    return this.userRepository.find();
+  }
   findOne(user): Promise<User> {
     return this.userRepository.findOne(user);
   }
