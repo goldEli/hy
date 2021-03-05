@@ -23,16 +23,17 @@ export class UserController {
   @Post('register')
   @ApiOperation({ summary: 'User register' })
   async register(@Body() user: LoginDto) {
+    const isExsit = await this.userService.findByName(user.name);
+    if (isExsit) {
+      return errorResponse({
+        message: 'user exsit',
+        data: {},
+      });
+    }
     const { password, ...res } = await this.userService.create(user);
     return successResponse({
       message: 'register success',
       data: { ...res },
     });
-  }
-
-  @Get()
-  @ApiOperation({ summary: 'User list' })
-  index(@Request() req) {
-    return this.userService.getAll();
   }
 }

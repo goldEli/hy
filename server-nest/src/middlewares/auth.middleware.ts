@@ -1,9 +1,8 @@
 import { HttpException } from '@nestjs/common/exceptions/http.exception';
 import { NestMiddleware, HttpStatus, Injectable } from '@nestjs/common';
-import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
-import { jwtConstants } from '../modules/user/constants';
+import { jwt as jwtConfig } from 'src/config';
 import { UserService } from '../modules/user/user.service';
 
 @Injectable()
@@ -15,8 +14,8 @@ export class AuthMiddleware implements NestMiddleware {
     if (authHeaders && (authHeaders as string).split(' ')[1]) {
       const token = (authHeaders as string).split(' ')[1];
       try {
-        const decoded = jwt.verify(token, jwtConstants.secret);
-        console.log(decoded);
+        const decoded = jwt.verify(token, jwtConfig.secret) as any;
+        req.user = decoded?.name;
       } catch (error) {
         throw new HttpException('Not authorized.', HttpStatus.UNAUTHORIZED);
       }

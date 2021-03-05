@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import * as jwt from 'jsonwebtoken';
-import { jwtConstants } from './constants';
+import { jwt as jwtConfig } from 'src/config';
 
 @Injectable()
 export class UserService {
@@ -17,6 +17,9 @@ export class UserService {
   findOne(user): Promise<User> {
     return this.userRepository.findOne(user);
   }
+  findByName(name: string): Promise<User> {
+    return this.userRepository.findOne({ where: { name } });
+  }
   create(user): Promise<User> {
     return this.userRepository.save(user);
   }
@@ -26,17 +29,13 @@ export class UserService {
     };
   }
   private generateJWT(user) {
-    // const today = new Date();
-    // const exp = new Date(today);
-    // exp.setDate(today.getDate() + 60);
-
     return jwt.sign(
       {
         id: user.id,
         name: user.name,
-        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 12, // 12h
+        exp: jwtConfig.exp, // 12h
       },
-      jwtConstants.secret,
+      jwtConfig.secret,
     );
   }
 }
