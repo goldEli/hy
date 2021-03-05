@@ -25,9 +25,8 @@ export const http = (url: string, { data, ...customConfig }: IConfig = {}) => {
 
   return fetch(url, config).then(async (response) => {
     if (response.status === 401) {
-      // await auth.logout();
-      window.location.reload();
-      return Promise.reject({ message: '请重新登录' });
+      history.push('/login');
+      return Promise.reject('请重新登录');
     }
     const data = await response.json();
     if (response.ok) {
@@ -38,7 +37,7 @@ export const http = (url: string, { data, ...customConfig }: IConfig = {}) => {
         return data.data;
       }
       if (data.status === 500) {
-        return Promise.reject(data.message);
+        return Promise.reject(data?.message);
       }
       return Promise.reject(data);
     } else {

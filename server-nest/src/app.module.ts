@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ClientModule } from './modules/client/client.module';
@@ -7,6 +7,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { User } from './modules/user/user.entity';
 import { Client } from './modules/client/client.entity';
+import { AuthMiddleware } from './middlewares/auth.middleware';
+import { UserController } from './modules/user/user.controller';
+import { ClientController } from './modules/client/client.controller';
 
 @Module({
   imports: [
@@ -29,4 +32,8 @@ import { Client } from './modules/client/client.entity';
 })
 export class AppModule {
   constructor(private readonly connection: Connection) {}
+
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuthMiddleware).forRoutes(ClientController);
+  }
 }

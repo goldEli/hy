@@ -2,10 +2,10 @@ import { http } from '@/utils/http';
 import { Toast } from 'antd-mobile';
 import { useMutation, useQueryClient } from 'react-query';
 
-export const API_CLIENTS_LIST = '/api/clients/list';
-export const API_CLIENTS_ADD = '/api/clients/add';
-export const API_CLIENTS_DEL = '/api/clients/del';
-export const API_CLIENTS_UPDATE = '/api/clients/update';
+export const API_CLIENTS_LIST = '/api/client';
+export const API_CLIENTS_ADD = '/api/client/add';
+export const API_CLIENTS_DEL = '/api/client/del';
+export const API_CLIENTS_UPDATE = '/api/client/update';
 export interface IClient {
   id: string;
   name: string;

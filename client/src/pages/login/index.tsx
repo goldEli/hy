@@ -34,8 +34,12 @@ const Login: React.FC<ILoginProps> = (props) => {
       data: user,
       method: 'POST',
     })
-      .then(() => {
-        history.push('/');
+      .then((data) => {
+        if (data?.access_token) {
+          const token = data?.access_token;
+          localStorage.setItem('token', token);
+          history.push('/');
+        }
       })
       .catch((message) => {
         Toast.fail(message);

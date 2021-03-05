@@ -11,11 +11,10 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(name: string, password: string): Promise<any> {
+    console.log(name, password);
     const user = await this.userService.findOne({ name, password });
     if (!user) {
-      throw new UnauthorizedException(
-        errorResponse({ message: '账号密码错误' }),
-      );
+      throw new UnauthorizedException('123');
     }
     return user;
   }

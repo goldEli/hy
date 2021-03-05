@@ -1,28 +1,20 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  UseGuards,
-  Request,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, Request } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { errorResponse, successResponse } from 'src/utils';
 import { LoginDto } from './dto/login.dto';
 import { UserService } from './user.service';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('user')
 @ApiTags('User')
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @UseGuards(AuthGuard('local'))
+  // @UseGuards(AuthGuard('local'))
   @Post('login')
   @ApiOperation({ summary: 'User login' })
   async login(@Body() user: LoginDto) {
-    // const res = await this.userService.findOne(user);
-    // if (!res) return errorResponse({ message: 'user or password error' });
+    const res = await this.userService.findOne(user);
+    if (!res) return errorResponse({ message: 'user or password error' });
 
     const token = await this.userService.login(user);
     return successResponse({ message: 'login success', data: token });
@@ -38,7 +30,6 @@ export class UserController {
     });
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Get()
   @ApiOperation({ summary: 'User list' })
   index(@Request() req) {

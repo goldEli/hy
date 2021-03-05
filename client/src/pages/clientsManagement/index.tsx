@@ -18,6 +18,7 @@ const ClientsManagement: React.FC<IClientsManagementProps> = (props) => {
   const { data } = useQuery<IClient[]>(API_CLIENTS_LIST, getClients);
   const { del } = useDelClient();
   const { update } = useUpdateClient();
+  console.log(data)
   return (
     <>
       <NavBar

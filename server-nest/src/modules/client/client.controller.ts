@@ -7,10 +7,9 @@ import {
   ParseIntPipe,
   Post,
   Put,
-  UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { successResponse } from 'src/utils';
 import { Client } from './client.entity';
 import { ClientService } from './client.service';
 import { CreateClientDto } from './dto/create-client.dto';
@@ -20,11 +19,11 @@ import { CreateClientDto } from './dto/create-client.dto';
 export class ClientController {
   constructor(private clientService: ClientService) {}
 
-  @UseGuards(AuthGuard('local'))
   @Get()
   @ApiOperation({ summary: 'Get list of clients' })
-  index(): Promise<Client[]> {
-    return this.clientService.findAll();
+  async index() {
+    const res = await this.clientService.findAll();
+    return successResponse({ data: res });
   }
 
   @Post()
