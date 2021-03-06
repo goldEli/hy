@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ClientModule } from './modules/client/client.module';
@@ -8,7 +8,7 @@ import { Connection } from 'typeorm';
 import { User } from './modules/user/user.entity';
 import { Client } from './modules/client/client.entity';
 import { AuthMiddleware } from './middlewares/auth.middleware';
-import { UserController } from './modules/user/user.controller';
+import { LogMiddleware } from './middlewares/log.middleware';
 import { ClientController } from './modules/client/client.controller';
 
 @Module({
@@ -34,6 +34,9 @@ export class AppModule {
   constructor(private readonly connection: Connection) {}
 
   configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LogMiddleware)
+      .forRoutes({ method: RequestMethod.ALL, path: '*' });
     consumer.apply(AuthMiddleware).forRoutes(ClientController);
   }
 }
